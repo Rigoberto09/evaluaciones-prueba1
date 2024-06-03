@@ -18,7 +18,7 @@ export class ProductoController {
 
     @Post()
     async Creaproducto(@Body() data: Productos) {
-        if (data.name.trim() !== '' && data.name.trim() !== '' && data.price.trim() !== '') {
+        if (data.name.trim() !== '' && data.price.trim() !== '' && data.unit.trim() !== '' && data.tax.trim() !== '') {
 
 
             try {
@@ -60,7 +60,7 @@ export class ProductoController {
 
     @Put(':productcode')
     async actualizaproducto(@Param('productcode') productcode: string, @Body() data: Productos) {
-        if (data.name.trim() !== '' && data.name.trim() !== '' && data.price.trim() !== '' && productcode.trim() !== '') {
+        if (data.name.trim() !== '' && data.price.trim() !== '' && data.unit.trim() !== '' && data.tax.trim() !== '') {
 
             try {
                 return this.productoService.actualizarProducto(Number(productcode), data);
