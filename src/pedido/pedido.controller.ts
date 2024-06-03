@@ -18,7 +18,7 @@ export class PedidoController {
 
     @Post()
     async CreaPedido(@Body() data: pedidos) {
-        if (data.productcode.trim() !== '' && data.address.trim() !== '' && data.CustomerCode.trim() !== '') {
+        if (data.productcode.trim() !== '' && data.CustomerCode.trim() !== '' && data.quantity.trim() !== '' && data.SubTotal.trim() !== ''&& data.Total.trim() !== ''&& data.others.trim() !== ''&& data.address.trim() !== '') {
 
 
             try {
@@ -60,7 +60,7 @@ export class PedidoController {
 
     @Put(':CustomerCode')
     async actualizaPedido(@Param('CustomerCode') CustomerCode: string, @Body() data: pedidos) {
-        if (data.productcode.trim() !== '' && data.address.trim() !== '' && data.CustomerCode.trim() !== '' && CustomerCode.trim() !== '') {
+        if (data.productcode.trim() !== '' && data.CustomerCode.trim() !== '' && data.quantity.trim() !== '' && data.SubTotal.trim() !== ''&& data.Total.trim() !== ''&& data.others.trim() !== ''&& data.address.trim() !== '') {
 
             try {
                 return this.pedidoService.actualizarPedido(Number(CustomerCode), data);
