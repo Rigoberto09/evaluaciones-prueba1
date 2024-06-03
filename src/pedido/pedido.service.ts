@@ -5,18 +5,18 @@ import { pedidos } from '@prisma/client';
 export class PedidoService {
     constructor(private prisma: PrismaService) { }
 
-    // async getCliente(): Promise<pedidos[]>{
+    // async getPedido(): Promise<pedidos[]>{
 
     //     return this.prisma.pedidos.findMany()
     // }
-    async getCliente(): Promise<pedidos[]> {
+    async getPedido(): Promise<pedidos[]> {
         const pedidos = await this.prisma.pedidos.findMany();
         if (pedidos.length === 0) {
             throw new NotFoundException('No se encontraron pedidos');
         }
         return pedidos;
     }
-    //   async getClientes(): Promise<any> {
+    //   async getPedidos(): Promise<any> {
     //     const pedidos = await this.prisma.pedidos.findMany();
     //     if (pedidos.length === 0) {
     //       return { message: 'No se encontraron pedidos' };
@@ -24,7 +24,7 @@ export class PedidoService {
     //     return pedidos;
     //   }
 
-    async getClienteId(code: number): Promise<pedidos> {
+    async getPedidoId(code: number): Promise<pedidos> {
         try {
             const pedido = await this.prisma.pedidos.findUnique({
                 where: {
@@ -44,12 +44,12 @@ export class PedidoService {
         }
     }
 
-    async crearCliente(data: pedidos): Promise<pedidos> {
+    async crearPedido(data: pedidos): Promise<pedidos> {
         return this.prisma.pedidos.create({
             data
         })
     }
-    async actualizarCliente(code: number, data: pedidos): Promise<pedidos> {
+    async actualizarPedido(code: number, data: pedidos): Promise<pedidos> {
 
         try {
             const pedido = await this.prisma.pedidos.update({
@@ -70,7 +70,7 @@ export class PedidoService {
             throw new InternalServerErrorException('Error al actualizar pedido');
         }
     }
-    async eliminarClienteId(code: number): Promise<pedidos> {
+    async eliminarPedidoId(code: number): Promise<pedidos> {
         try {
             const pedido = await this.prisma.pedidos.delete({
                 where: {

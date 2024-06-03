@@ -7,9 +7,9 @@ export class PedidoController {
     constructor(private readonly pedidoService: PedidoService) { }
 
     @Get()
-    async geClientes() {
+    async gePedidos() {
         try {
-            return this.pedidoService.getCliente();
+            return this.pedidoService.getPedido();
         } catch (error) {
             // console.error('Error al mostrar los pedido:', error);
             throw new InternalServerErrorException('No se pueden mostrar los pedidos');
@@ -17,12 +17,12 @@ export class PedidoController {
     }
 
     @Post()
-    async CreaCliente(@Body() data: pedidos) {
+    async CreaPedido(@Body() data: pedidos) {
         if (data.productcode.trim() !== '' && data.address.trim() !== '' && data.CustomerCode.trim() !== '') {
 
 
             try {
-                return this.pedidoService.crearCliente(data);
+                return this.pedidoService.crearPedido(data);
             } catch (error) {
                 // console.error('Error al crear el pedido:', error);
                 throw new InternalServerErrorException('No se puede crear el pedido');
@@ -34,7 +34,7 @@ export class PedidoController {
     @Get(':CustomerCode')
     async regirtroUnico(@Param('CustomerCode') CustomerCode: string) {
         try {
-            return this.pedidoService.getClienteId(Number(CustomerCode))
+            return this.pedidoService.getPedidoId(Number(CustomerCode))
         } catch (error) {
             // console.error('Error al mostrar un pedido:', error);
             throw new InternalServerErrorException('Tal parece que no se puede mostrar este pedido');
@@ -42,11 +42,11 @@ export class PedidoController {
     }
 
     @Delete(':CustomerCode')
-    async eliminaCliente(@Param('CustomerCode') CustomerCode: string) {
+    async eliminaPedido(@Param('CustomerCode') CustomerCode: string) {
         if (CustomerCode.trim() !== '') {
             try {
-                await this.pedidoService.eliminarClienteId(Number(CustomerCode));
-                return { mensaje: 'Cliente eliminado correctamente' };
+                await this.pedidoService.eliminarPedidoId(Number(CustomerCode));
+                return { mensaje: 'Pedido eliminado correctamente' };
             } catch (error) {
                 // Control de error al eliminar datos
                 console.error('Error al eliminar pedido:', error);
@@ -59,11 +59,11 @@ export class PedidoController {
 
 
     @Put(':CustomerCode')
-    async actualizaCliente(@Param('CustomerCode') CustomerCode: string, @Body() data: pedidos) {
+    async actualizaPedido(@Param('CustomerCode') CustomerCode: string, @Body() data: pedidos) {
         if (data.productcode.trim() !== '' && data.address.trim() !== '' && data.CustomerCode.trim() !== '' && CustomerCode.trim() !== '') {
 
             try {
-                return this.pedidoService.actualizarCliente(Number(CustomerCode), data);
+                return this.pedidoService.actualizarPedido(Number(CustomerCode), data);
             } catch (error) {
                 // console.error('Error al actualizar el pedido:', error);
                 throw new InternalServerErrorException('Tal parece que no se puede actualizar este pedido');
